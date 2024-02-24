@@ -5,7 +5,7 @@ const router = Router();
 router.get("/countries", getCountries);
 router.get("/countries/:id", getCountriesByID);
 router.get("/countries/name", getCountriesByName);
-router.post("/activity", postActivity);
-router.get("/activity", getActivities);
+router.post("/activities", postActivity);
+router.get("/activities", getActivities);
 
 module.exports = router;

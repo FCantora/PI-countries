@@ -17,6 +17,7 @@ const getApiHandler = async () => {
         subregion: country.subregion,
         area: country.area,
         population: country.population,
+        activity: [],
       });
     }
     console.log("Countries created");

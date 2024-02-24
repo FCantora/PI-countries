@@ -6,7 +6,7 @@ export default function Landing() {
             <br>
             </br>
 
-            <button>Ingresar</button>
+            <button >Ingresar</button>
 
         </div>
     )

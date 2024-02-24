@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import { GET_COUNTRIES, FILTER, ORDER, SEARCH, ERROR, CLEAN_ALL } from "./actiontypes";
 import axios from "axios";
-const ENDPOINT = 'http://localhost:3001/countries/';
+const ENDPOINT = 'http://localhost:3001';
 
 export const getCountries = (countries) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.get(ENDPOINT, countries);
+            const { data } = await axios.get(`${ENDPOINT}/countries`, countries);
             return dispatch({
                 type: GET_COUNTRIES,
                 payload: data,
@@ -20,7 +20,7 @@ export const getCountries = (countries) => {
 export const getDetail = (key) => {
     return async (dispatch) => { //* Se hace el llamado a la API.
         try {
-            const { data } = await axios(`${ENDPOINT}${key}`);
+            const { data } = await axios(`${ENDPOINT}/countries/${key}`);
             return dispatch({
                 type: "GET_DETAIL",
                 payload: data,
@@ -34,9 +34,23 @@ export const getDetail = (key) => {
 export const postActivity = (activity) => {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post(ENDPOINT, activity);
+            const { data } = await axios.post(`${ENDPOINT}/activities}`, activity);
             return dispatch({
                 type: "POST_ACTIVITY",
+                payload: data,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+}
+
+export const getActivities = () => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios(`${ENDPOINT}/activities`);
+            return dispatch({
+                type: "GET_ACTIVITIES",
                 payload: data,
             });
         } catch (error) {

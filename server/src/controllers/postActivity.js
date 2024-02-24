@@ -2,21 +2,21 @@ const { Activity, Country } = require("../db");
 
 const postActivity = async (req, res) => {
   try {
-    const { id, name, difficulty, duration, season, countries } = req.body;
-    if (![id, name, difficulty, season].every(Boolean))
+    const { name, difficulty, duration, season, countries } = req.body;
+    if (![name, difficulty, season].every(Boolean))
       return res.status(400).json({ message: "Missing information" });
     const activity = await Activity.create({
-      id,
       name,
       difficulty,
       duration,
       season,
+      countries,
     });
     // Asegúrate de que 'countries' es un array de IDs de países
     if (countries && Array.isArray(countries) && countries.length > 0) {
       const countriesToAdd = await Country.findAll({
         where: {
-          id: countries,
+          name: countries,
         },
       });
       await activity.addCountries(countriesToAdd);

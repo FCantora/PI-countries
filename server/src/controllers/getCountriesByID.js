@@ -1,10 +1,17 @@
-const { Country } = require("../db");
+const { Country, Activity } = require("../db");
 
 const getCountriesByID = async (req, res) => {
   const countryId = req.params.id.toUpperCase();
   try {
     const country = await Country.findOne({
       where: { id: countryId },
+      include: {
+        model: Activity,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        }
+      }
     });
 
     if (country) {

@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import Validations from "./Validations";
 import axios from "axios";
+import ShowActivities from "./ShowActivities";
+import { Link } from "react-router-dom";
 
 const URL = "http://localhost:3001/activities"
 const ENDPOINT = 'http://localhost:3001/countries';
 
 export default function Form() {
     const [activity, setActivity] = useState({
-        id: "",
         name: "",
         difficulty: 0,
         duration: 0,
@@ -21,7 +22,7 @@ export default function Form() {
         difficulty: "",
         duration: "",
         season: "",
-        countries: ""
+        countriesId: ""
     });
 
     const handleChange = (event) => {
@@ -60,30 +61,32 @@ export default function Form() {
         })
     }
 
-
+    
     const submitHandler = async (event) => {
         event.preventDefault();
-        console.log(activity);
-
-        const formData = new FormData(activity);
-        const { name, difficulty, duration, season, countries } = formData;
-
+        
+        let dataToSend = {}
+        dataToSend = {
+            name: activity.name,
+            difficulty: activity.difficulty,
+            duration: activity.duration,
+            season: activity.season,
+            countries: activity.countries
+        }
+        
+        console.log('este es datatosend ', dataToSend);
 
         try {
-        const response = await axios.post(URL, {
-          name,
-          difficulty,
-          duration,
-          season,
-          countries,
-        });
+            const response = await axios.post(URL, dataToSend);
 
-        // Puedes hacer más acciones después de la creación exitosa, como limpiar el formulario o redirigir a otra página.
-          } catch (error) {
-            console.error("Error al crear la actividad:", error.message);
+            // Puedes hacer más acciones después de la creación exitosa, como limpiar el formulario o redirigir a otra página.
+            console.log(response);
+        } catch (error) {
+            console.error("Error al crear la actividad:", error.response.data);
             alert("Error al crear la actividad");
-          }
+        }
     };
+
 
 
     //!TODO EL BLOQUE QUE SIGUE HASTA EL USEEFFECT SE PARECE A UNA PETICIÓN YA HECHA, VER DE RECICLAR CÓDIGO.
@@ -161,6 +164,14 @@ export default function Form() {
             <div>
                 <button type="submit">Submit</button>
             </div>
+            <div>
+                <button type="reset">Reset</button>
+            </div>
+            <div>
+                <Link to="/show" element= {<ShowActivities />}>Show Activities</Link>
+            </div>
+
+
         </form>
     )
 }

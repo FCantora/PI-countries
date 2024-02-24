@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Cards from "../Components/Cards"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { getCountries, filter, order, cleanAll } from "../redux/actioncreators"
 
 const Home = () => {
@@ -68,6 +68,10 @@ const Home = () => {
                     <optgroup label="population:">
                         <option value='AscendentByPopulation'>Max - Min</option>
                         <option value='DescendentByPopulation'>Min - Max</option>
+                    </optgroup>
+                    <optgroup label="area:">
+                        <option value='AscendentByArea'>Max - Min</option>
+                        <option value='DescendentByArea'>Min - Max</option>
                     </optgroup>
                 </select>
                 <button onClick={resetFilters}>Reset Filters</button>

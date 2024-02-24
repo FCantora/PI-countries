@@ -1,12 +1,12 @@
 /* eslint-disable no-case-declarations */
-import { GET_COUNTRIES, GET_DETAIL, POST_ACTIVITY, FILTER, ORDER, SEARCH, ERROR } from "./actiontypes";
+import { GET_COUNTRIES, GET_DETAIL, POST_ACTIVITY, GET_ACTIVITIES, FILTER, ORDER, SEARCH, ERROR } from "./actiontypes";
 
 const initialState = {
   countries: [],
   filteredCountries: [],
   searchedCountries: [],
   detail: {},
-  activity: [],
+  activities: [],
   error: ''
 };
 
@@ -19,36 +19,39 @@ export default function reducer(state = initialState, { type, payload }) {
       return { ...state, detail: payload, error: '' };
 
     case POST_ACTIVITY:
-      return { ...state, activity: payload, error: '' };
+      return { ...state, activities: payload, error: '' };
+
+    case GET_ACTIVITIES:
+      return { ...state, activities: payload, error: '' };
 
     case SEARCH:
-      // var allCountriesToSearch = [];
-      // if (state.filteredCountries.length > 0) {
-      //   allCountriesToSearch = state.filteredCountries        
-      // } else {
-      //   allCountriesToSearch = state.countries
-      // }
-
       const searchedCountries = state.countries.filter((country) => {
-        return country.name.toLowerCase().startsWith(payload.toLowerCase());        
+        return country.name.toLowerCase().startsWith(payload.toLowerCase());
       })
       return {
         ...state,
-        searchedCountries: payload === '' ? state.countries : searchedCountries,
+        searchedCountries: payload === '' ? [] : searchedCountries,
         filteredCountries: [],
       }
 
     case FILTER:
       var allCountriesToFilter = [];
-      if (!state.filteredCountries.filter((country) => country.continent === payload)) {
-        allCountriesToFilter = state.filteredCountries        
-      } else if (state.searchedCountries.length > 0) {
+
+      if (state.searchedCountries.length > 0) {
         allCountriesToFilter = state.searchedCountries
       } else {
         allCountriesToFilter = state.countries
       }
+      // if (!state.filteredCountries.filter((country) => country.continent === payload)) {
+      //   allCountriesToFilter = state.filteredCountries        
+      // } else if (state.searchedCountries.length > 0) {
+      //   allCountriesToFilter = state.searchedCountries
+      // } else {
+      //   allCountriesToFilter = state.countries
+      // }
 
       const continentFiltered = allCountriesToFilter.filter(country => country.continent === payload);
+
       return {
         ...state,
         filteredCountries: payload === 'All' ? allCountriesToFilter : continentFiltered,
@@ -73,6 +76,10 @@ export default function reducer(state = initialState, { type, payload }) {
           return b.population - a.population;
         } else if (payload === 'DescendentByPopulation') {
           return a.population - b.population;
+        } else if (payload === 'AscendentByArea') {
+          return b.area - a.area;
+        } else if (payload === 'DescendentByArea') {
+          return a.area - b.area;
         }
       })
 

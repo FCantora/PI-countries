@@ -37,6 +37,16 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      // activities: {
+      //   type: DataTypes.ARRAY(DataTypes.STRING),
+      //   validate: {
+      //     areValidStrings(value) {
+      //       if (!value.every((item) => typeof item === "string")) {
+      //         throw new Error("Invalid value in activities array");
+      //       }
+      //     },
+      //   },
+      // },
     },
     {
       timestamps: false,

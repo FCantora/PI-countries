@@ -8,6 +8,7 @@ import NavBar from './Components/NavBar';
 import Detail from './components/Detail';
 import Form from './components/Form';
 import Home from './components/Home';
+import ShowActivities from './components/ShowActivities';
 
 export default function App() {
   const { pathname } = useLocation();
@@ -20,6 +21,7 @@ export default function App() {
           <Route path='/home' element={<Home /*countries={countries}*/ /*onClose={onClose}*/ />} />
           <Route path='/activities' element={<Form />} />
           <Route path='/detail/:key' element={<Detail />} />
+          <Route path='/show' element={<ShowActivities />} />
         </Routes>
       </div>
   );

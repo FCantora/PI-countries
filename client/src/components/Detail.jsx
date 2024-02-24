@@ -15,6 +15,8 @@ export default function Detail() {
         dispatch(getDetail(key));
     }, [key]);
 
+    console.log(country.Activities);
+
     return (
         <div /*className={styles.detailContainer}*/>
             <Link to='/home'>
@@ -29,6 +31,7 @@ export default function Detail() {
                 <li>Subregion: {country.subregion}</li>
                 <li>Area: {country.area}</li>
                 <li>Population: {country.population}</li>
+                <li>Activities: {country.Activities.map(activity => activity.name).join(', ')}</li>
             </ul>
         </div>
     )
