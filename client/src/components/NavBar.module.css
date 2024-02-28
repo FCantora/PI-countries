@@ -1,0 +1,79 @@
+.navbar {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.img{
+    width: 75px;
+    height: 75px;
+}
+
+.searchbar {
+    margin-right: 20px;
+}
+
+.homeButton {
+    border: 1px solid #4CAF50;
+    border-radius: 150px;
+    padding: 10px 20px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.homeButton:hover {
+    transform: scale(1.1);
+}
+
+.homeButton:active {
+    transform: scale(0.9);
+    border: 1px solid #b18a15;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.button:active {
+    transform: scale(0.9);
+}
+
+.logoutButton {
+    background-color: #d03e43;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logoutButton:hover {
+    background-color: #b82323;
+    transition: all 0.4s ease-in-out;
+}
+
+.logoutButton:active {
+    transform: scale(0.9);
+}

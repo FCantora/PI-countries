@@ -1,10 +1,11 @@
 /* eslint-disable no-const-assign */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import Cards from "../Components/Cards"
+import Cards from './Cards'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { getCountries, filter, order, cleanAll } from "../redux/actioncreators"
+import { getCountries, filter, order, cleanAll } from "../../redux/actioncreators"
+import styles from './Home.module.css'
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -46,10 +47,9 @@ const Home = () => {
     }
 
     return (
-        <div>
-            <h1> Home </h1>
-            <div>
-                <select name='filter' value={filterValue} onChange={handleFilter}>
+        <div className={styles.container}>
+            <div className={styles.filters}>
+                <select name='filter' className={styles.select} value={filterValue} onChange={handleFilter}>
                     <option value="" disabled>Select Continent</option>
                     <option value='All'>All</option>
                     <option value='Africa'>Africa</option>
@@ -59,7 +59,7 @@ const Home = () => {
                     <option value='Europe'>Europe</option>
                     <option value='Oceania'>Oceania</option>
                 </select>
-                <select name='order' value={orderValue} onChange={handleOrder}>
+                <select name='order' className={styles.select} value={orderValue} onChange={handleOrder}>
                     <option value="" disabled>Sort by</option>
                     <optgroup label="name:">
                         <option value='Ascendent'>Name A-Z</option>
@@ -74,7 +74,7 @@ const Home = () => {
                         <option value='DescendentByArea'>Min - Max</option>
                     </optgroup>
                 </select>
-                <button onClick={resetFilters}>Reset Filters</button>
+                <button className={styles.button} onClick={resetFilters}>Reset Filters</button>
             </div>
             <div>
                 <Cards countries={filteredResults()} />

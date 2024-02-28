@@ -20,7 +20,7 @@ export default function Validations(activity) {
     }
 
     if (activity.countries.length < 1) {
-        newErrors.countries = 'Countries is required';
+        newErrors.countries = 'Country is required';
     } else {
         newErrors.countries = '';
     }

@@ -1,19 +1,34 @@
-// import { Route } from "react-router-dom"
-// import Form from "./Form"
-
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Searchbar from "./Searchbar";
+import styles from './NavBar.module.css'
+import img from '../assets/airplane.svg'
 
 export default function NavBar() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const navigateTo = (path) => {
+        navigate(path);
+    };
     return (
-        <div>
-            <p>Esta es la Navbar</p>
-            <Link to='/activities'>
-                <button>Activities</button>
-            </Link>
-            <div>
-                <Searchbar />
-            </div>
+        <div className={styles.navbar}>
+            <button className={styles.homeButton} onClick={() => navigateTo('/home')}>
+                <img src={img} alt="airplane" className={styles.img} />
+            </button>
+            {location.pathname === '/home' && (
+                <div className={styles.searchBar}>
+                    <Searchbar />
+                </div>
+            )}
+            <button className={styles.button} onClick={() => navigateTo('/activityform')}>
+                Add Activity
+            </button>
+            <button className={styles.button} onClick={() => navigateTo('/activities')}>
+                Activities
+            </button>
+            <button className={styles.logoutButton} onClick={() => navigateTo('/')}>
+                Logout
+            </button>
         </div>
     )
 }

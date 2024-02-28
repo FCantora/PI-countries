@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-case-declarations */
-import { GET_COUNTRIES, GET_DETAIL, POST_ACTIVITY, GET_ACTIVITIES, FILTER, ORDER, SEARCH, ERROR } from "./actiontypes";
+import { GET_COUNTRIES, GET_DETAIL, POST_ACTIVITY, GET_ACTIVITIES, FILTER, ORDER, FILTER_ACTIVITIES, ORDER_ACTIVITIES, CLEAN_ALL, CLEAN_DETAIL, SEARCH, ERROR, DELETE_ACTIVITY } from "./actiontypes";
 
 const initialState = {
   countries: [],
   filteredCountries: [],
   searchedCountries: [],
+  filteredActivities: [],
   detail: {},
   activities: [],
   error: ''
@@ -58,12 +60,10 @@ export default function reducer(state = initialState, { type, payload }) {
       }
 
     case ORDER:
-      var orderArray = [];
+      let orderArray = [];
       if (state.filteredCountries.length > 0) {
         orderArray = [...state.filteredCountries]
-      } /*else if (state.searchedCountries.length > 0) {
-        orderArray = state.searchedCountries
-      }*/ else {
+      } else {
         orderArray = [...state.countries]
       }
 
@@ -88,11 +88,76 @@ export default function reducer(state = initialState, { type, payload }) {
         filteredCountries: sortedArray,
       }
 
+    case ORDER_ACTIVITIES:
+      let orderedActivities = [];
+
+      if (state.filteredActivities.length > 0) {
+        orderedActivities = [...state.filteredActivities]
+      } else {
+        orderedActivities = [...state.activities]
+      }
+
+      const sortedActivities = orderedActivities.sort((a, b) => {
+        if (payload === 'Ascendent') {
+          return a.name.localeCompare(b.name);
+        } else if (payload === 'Descendent') {
+          return b.name.localeCompare(a.name);
+        } else if (payload === 'AscendentByDifficulty') {
+          return b.difficulty - a.difficulty;
+        } else if (payload === 'DescendentByDifficulty') {
+          return a.difficulty - b.difficulty;
+        } else if (payload === 'AscendentByDuration') {
+          return b.duration - a.duration;
+        } else if (payload === 'DescendentByDuration') {
+          return a.duration - b.duration;
+        }
+      })
+
+      return {
+        ...state,
+        filteredActivities: sortedActivities,
+      }
+
+    case FILTER_ACTIVITIES:
+      let activitiesToFilter = [];
+
+      if (state.filteredActivities.length > 0) {
+        activitiesToFilter = state.filteredActivities
+      } else {
+        activitiesToFilter = state.activities
+      }
+
+      const activitiesFiltered = activitiesToFilter.filter(activity => activity.name === payload);
+
+      return {
+        ...state,
+        filteredActivities: payload === 'All' ? activitiesToFilter : activitiesFiltered,
+      }
+
+    case DELETE_ACTIVITY:
+      return {
+        ...state,
+        filteredActivities: state.filteredActivities.filter((activity) => activity.id !== payload),
+        activities: state.activities.filter((activity) => activity.id !== payload),
+      }
+
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        detail: {},
+      }
+
     case 'CLEAN_ALL':
       return {
         ...state,
         filteredCountries: [],
         searchedCountries: [],
+      }
+
+    case 'CLEAN_ACTIVITY_FILTERS':
+      return {
+        ...state,
+        filteredActivities: [],
       }
 
     case ERROR:

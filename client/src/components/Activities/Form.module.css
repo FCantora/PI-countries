@@ -1,0 +1,119 @@
+.container {
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.formContainer {
+  background-color: rgba(250, 235, 215, 0.7);
+  border: 1px solid #797878;
+  box-shadow: 0px 0px 8px #ffffffa4;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-family: "Roboto", sans-serif;
+}
+
+.form {
+  align-items: start;
+  justify-content: space-around;
+  gap: 3px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  text-wrap: nowrap;
+  width: 100%;
+}
+
+.margins {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.label {
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: 0px 1px 1px rgb(168, 167, 167);
+  color: rgb(7, 7, 7);
+  margin-right: 10px;
+}
+
+.input {
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+}
+
+span {
+  font-size: 10px;
+  margin-top: 2px;
+  display: block;
+}
+span.error {
+  color: red;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.button:active {
+    transform: scale(0.9);
+}
+
+.activityButton {
+    background-color: #f0ae20;
+    color: rgb(38, 26, 2);
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 1000;
+    font-family: "Roboto", sans-serif;
+    text-shadow: 1px 1px 1px rgb(253, 251, 251, 0.5);
+    box-shadow: 0px 0px 900px #ffffffa4;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 20px 60px;
+  }
+  
+  .activityButton:hover {
+    box-shadow: none;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .activityButton:active {
+    transform: scale(0.6);
+    transition: all 0.2s ease-in-out;
+  }
